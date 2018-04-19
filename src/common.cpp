@@ -61,3 +61,8 @@ void freeMap(Map *m)
 	delete[] m->matrix;
 	delete m;
 }
+
+bool isFinal(Position p, int xFinal, int yFinal)
+{
+	return (p.xs[p.ys.size() - 1] == xFinal && p.ys[p.ys.size() - 1] == yFinal);
+}
