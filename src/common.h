@@ -23,5 +23,6 @@ typedef struct Map
 
 Map *initMap(const char* fileName);
 void freeMap(Map*);
+bool isFinal(Position p, int xFinal, int yFinal);
 
 #endif

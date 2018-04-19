@@ -13,5 +13,10 @@ Position IDS(Map* map, int xInicial, int yInicial, int xFinal, int yFinal)
 	ret.ys.push_back(yInicial);
 	ret.costs.push_back(cost);
 
+	while(!isFinal(ret, xFinal, yFinal))
+	{
+		
+	}
+
 	return ret;
 }
