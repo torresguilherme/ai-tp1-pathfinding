@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <vector>
 #include <stack>
+#include <queue>
 #include <iterator>
 
 typedef struct Position
@@ -14,6 +15,7 @@ typedef struct Position
 	std::vector<float> costs;
 	std::vector<std::vector<bool>> visited;
 	int depth;
+	float priority;
 } Position;
 
 typedef struct Map

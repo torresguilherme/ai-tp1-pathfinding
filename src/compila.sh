@@ -2,8 +2,8 @@
 
 CC="g++"
 CFLAGS="-no-pie -Wall -std=c++17"
-SRCS="main.cpp common.cpp ids.cpp others.cpp"
-HDRS="common.h ids.h others.h"
+SRCS="main.cpp common.cpp ids.cpp bestFirst.cpp"
+HDRS="common.h ids.h bestFirst.h"
 BIN=" exec"
 DB="gdb"
 

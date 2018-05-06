@@ -1,6 +1,6 @@
 #include <cstring>
 #include "ids.h"
-#include "others.h"
+#include "bestFirst.h"
 
 int main(int argc, char **argv)
 {
@@ -12,7 +12,7 @@ int main(int argc, char **argv)
 	int yFinal = atoi(argv[6]);
 
 	const char *heuristic;
-	if (!strcmp(algorithm, "A*"))
+	if (!strcmp(algorithm, "A*")||!strcmp(algorithm, "greedyBFS"))
 	{
 		heuristic = argv[7];
 	}
@@ -25,9 +25,22 @@ int main(int argc, char **argv)
 	{
 		solution = IDS(m, xInicial, yInicial, xFinal, yFinal);
 	}
+	else if(!strcmp(algorithm, "UCS"))
+	{
+		solution = bestFirst(m, heuristic, 0, xInicial, yInicial, xFinal, yFinal);
+	}
+	else if(!strcmp(algorithm, "greedyBFS"))
+	{
+		solution = bestFirst(m, heuristic, 2, xInicial, yInicial, xFinal, yFinal);
+	}
+	else if(!strcmp(algorithm, "A*"))
+	{
+		solution = bestFirst(m, heuristic, 1, xInicial, yInicial, xFinal, yFinal);
+	}
 	else
 	{
-
+		std::cerr<<"tipo de algoritmo nao reconhecido"<<std::endl;
+		return -1;
 	}
 
 	std::cout<<"<"<<solution.xs.front()<<", "<<solution.ys.front()<<", "<<solution.costs.front()<<">"<<std::endl;
