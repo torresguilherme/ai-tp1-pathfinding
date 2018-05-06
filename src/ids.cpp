@@ -165,6 +165,6 @@ Position IDS(Map* map, int xInicial, int yInicial, int xFinal, int yFinal)
 	failure = aux;
 	failure.xs.push_back(xFinal);
 	failure.ys.push_back(yFinal);
-	failure.costs.push_back(0);
+	failure.costs.push_back(-1);
 	return failure;
 }

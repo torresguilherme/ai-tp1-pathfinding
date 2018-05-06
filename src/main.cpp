@@ -1,10 +1,6 @@
 #include <cstring>
 #include "ids.h"
-/*
-#include "ucs.h"
-#include "bestFirst.h"
-#include "aStar.h"
-*/
+#include "others.h"
 
 int main(int argc, char **argv)
 {
@@ -28,6 +24,10 @@ int main(int argc, char **argv)
 	if(!strcmp(algorithm, "IDS"))
 	{
 		solution = IDS(m, xInicial, yInicial, xFinal, yFinal);
+	}
+	else
+	{
+
 	}
 
 	std::cout<<"<"<<solution.xs.front()<<", "<<solution.ys.front()<<", "<<solution.costs.front()<<">"<<std::endl;
