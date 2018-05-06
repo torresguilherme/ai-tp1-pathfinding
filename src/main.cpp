@@ -23,6 +23,15 @@ int main(int argc, char **argv)
 
 	// inicializa mapa
 	Map *m = initMap(fileName);
+
+	Position solution;
+	if(!strcmp(algorithm, "IDS"))
+	{
+		solution = IDS(m, xInicial, yInicial, xFinal, yFinal);
+	}
+
+	std::cout<<"<"<<solution.xs.front()<<", "<<solution.ys.front()<<", "<<solution.costs.front()<<">"<<std::endl;
+	std::cout<<"<"<<solution.xs.back()<<", "<<solution.ys.back()<<", "<<solution.costs.back()<<">"<<std::endl<<std::endl;
 	
 	// aplica o algoritmo
 	// libera o mapa
