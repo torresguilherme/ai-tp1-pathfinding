@@ -3,5 +3,6 @@
 #include "common.h"
 
 Position IDS(Map* map, int xInicial, int yInicial, int xFinal, int yFinal);
+Position depthFirst(Map*, Position, int);
 
 #endif
