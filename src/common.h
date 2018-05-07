@@ -13,6 +13,7 @@ typedef struct Position
 	std::vector<int> xs;
 	std::vector<int> ys;
 	std::vector<float> costs;
+	std::vector<std::vector<bool>> visited;
 	int depth;
 	float priority;
 } Position;
