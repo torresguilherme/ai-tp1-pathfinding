@@ -4,5 +4,6 @@
 
 Position bestFirst(Map*, const char*, int, int, int, int, int);
 float hValue(Position, int, int, const char*);
+int compare(const void*, const void*);
 
 #endif

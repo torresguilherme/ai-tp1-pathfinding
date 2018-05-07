@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CC="g++"
-CFLAGS="-no-pie -Wall -std=c++17"
+CFLAGS="-no-pie -g3 -std=c++17"
 SRCS="main.cpp common.cpp ids.cpp bestFirst.cpp"
 HDRS="common.h ids.h bestFirst.h"
 BIN=" exec"

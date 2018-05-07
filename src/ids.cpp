@@ -13,17 +13,19 @@ Position IDS(Map* map, int xInicial, int yInicial, int xFinal, int yFinal)
 	aux.costs.push_back(cost);
 	aux.depth = 0;
 
+	vector<vector<bool>> visited;
+
 	for(int i = 0; i < map->height; i++)
 	{
 		vector<bool> v;
-		aux.visited.push_back(v);
+		visited.push_back(v);
 		for(int j = 0; j < map->width; j++)
 		{
-			aux.visited[i].push_back(false);
+			visited[i].push_back(false);
 		}
 	}
 
-	aux.visited[xInicial][yInicial] = true;
+	visited[xInicial][yInicial] = true;
 
 	if(isFinal(aux, xFinal, yFinal))
 	{
@@ -56,9 +58,9 @@ Position IDS(Map* map, int xInicial, int yInicial, int xFinal, int yFinal)
 				bool rightFree = false;
 				// empurra outros nos na pilha
 				// up
-				if(current.xs.back() > 1
+				if(current.xs.back() > 0
 				&& map->matrix[current.xs.back() - 1][current.ys.back()] == '.'
-				&& !current.visited[current.xs.back() - 1][current.ys.back()])
+				&& !visited[current.xs.back() - 1][current.ys.back()])
 				{
 					upFree = true;
 					Position newP = current;
@@ -66,14 +68,14 @@ Position IDS(Map* map, int xInicial, int yInicial, int xFinal, int yFinal)
 					newP.ys.push_back(current.ys.back());
 					newP.costs.push_back(newP.costs.back()+1);
 					newP.depth = current.depth + 1;
-					newP.visited[newP.xs.back()-1][newP.ys.back()] = true;
+					visited[newP.xs.back()][newP.ys.back()] = true;
 					frontier.push(newP);
 				}
 
 				// down
 				if(current.xs.back() < map->height - 1
 				&& map->matrix[current.xs.back() + 1][current.ys.back()] == '.'
-				&& !current.visited[current.xs.back() + 1][current.ys.back()])
+				&& !visited[current.xs.back() + 1][current.ys.back()])
 				{
 					downFree = true;
 					Position newP = current;
@@ -81,14 +83,14 @@ Position IDS(Map* map, int xInicial, int yInicial, int xFinal, int yFinal)
 					newP.ys.push_back(current.ys.back());
 					newP.costs.push_back(newP.costs.back()+1);
 					newP.depth = current.depth + 1;
-					newP.visited[newP.xs.back()+1][newP.ys.back()] = true;
+					visited[newP.xs.back()][newP.ys.back()] = true;
 					frontier.push(newP);
 				}
 
 				// left
-				if(current.ys.back() > 1
+				if(current.ys.back() > 0
 				&& map->matrix[current.xs.back()][current.ys.back() - 1] == '.'
-				&& !current.visited[current.xs.back()][current.ys.back() - 1])
+				&& !visited[current.xs.back()][current.ys.back() - 1])
 				{
 					leftFree = true;
 					Position newP = current;
@@ -96,14 +98,14 @@ Position IDS(Map* map, int xInicial, int yInicial, int xFinal, int yFinal)
 					newP.xs.push_back(current.xs.back());
 					newP.costs.push_back(newP.costs.back()+1);
 					newP.depth = current.depth + 1;
-					newP.visited[newP.xs.back()][newP.ys.back()-1] = true;
+					visited[newP.xs.back()][newP.ys.back()] = true;
 					frontier.push(newP);
 				}
 
 				// right
 				if(current.ys.back() < map->width - 1
 				&& map->matrix[current.xs.back()][current.ys.back() + 1] == '.'
-				&& !current.visited[current.xs.back()][current.ys.back() + 1])
+				&& !visited[current.xs.back()][current.ys.back() + 1])
 				{
 					rightFree = true;
 					Position newP = current;
@@ -111,7 +113,7 @@ Position IDS(Map* map, int xInicial, int yInicial, int xFinal, int yFinal)
 					newP.xs.push_back(current.xs.back());
 					newP.costs.push_back(newP.costs.back()+1);
 					newP.depth = current.depth + 1;
-					newP.visited[newP.xs.back()][newP.ys.back()+1] = true;
+					visited[newP.xs.back()][newP.ys.back()] = true;
 					frontier.push(newP);
 				}
 	
@@ -123,7 +125,7 @@ Position IDS(Map* map, int xInicial, int yInicial, int xFinal, int yFinal)
 					newP.xs.push_back(current.xs.back() - 1);
 					newP.costs.push_back(newP.costs.back()+1.5);
 					newP.depth = current.depth + 1;
-					newP.visited[newP.xs.back()-1][newP.ys.back()-1] = true;
+					visited[newP.xs.back()][newP.ys.back()] = true;
 					frontier.push(newP);
 				}
 				if(upFree && rightFree && map->matrix[current.xs.back()-1][current.ys.back()+1] == '.')
@@ -133,7 +135,7 @@ Position IDS(Map* map, int xInicial, int yInicial, int xFinal, int yFinal)
 					newP.xs.push_back(current.xs.back() - 1);
 					newP.costs.push_back(newP.costs.back()+1.5);
 					newP.depth = current.depth + 1;
-					newP.visited[newP.xs.back()-1][newP.ys.back()+1] = true;
+					visited[newP.xs.back()][newP.ys.back()] = true;
 					frontier.push(newP);
 				}
 				if(downFree && leftFree && map->matrix[current.xs.back()+1][current.ys.back()-1] == '.')
@@ -143,7 +145,7 @@ Position IDS(Map* map, int xInicial, int yInicial, int xFinal, int yFinal)
 					newP.xs.push_back(current.xs.back() + 1);
 					newP.costs.push_back(newP.costs.back()+1.5);
 					newP.depth = current.depth + 1;
-					newP.visited[newP.xs.back()+1][newP.ys.back()-1] = true;
+					visited[newP.xs.back()][newP.ys.back()] = true;
 					frontier.push(newP);
 				}
 				if(downFree && rightFree && map->matrix[current.xs.back()+1][current.ys.back()+1] == '.')
@@ -153,9 +155,17 @@ Position IDS(Map* map, int xInicial, int yInicial, int xFinal, int yFinal)
 					newP.xs.push_back(current.xs.back() + 1);
 					newP.costs.push_back(newP.costs.back()+1.5);
 					newP.depth = current.depth + 1;
-					newP.visited[newP.xs.back()+1][newP.ys.back()+1] = true;
+					visited[newP.xs.back()][newP.ys.back()] = true;
 					frontier.push(newP);
 				}
+			}
+		}
+
+		for(int j = 0; j < map->height; j++)
+		{
+			for(int k = 0; k < map->width; k++)
+			{
+				visited[j][k] = false;
 			}
 		}
 	}
