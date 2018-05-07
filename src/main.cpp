@@ -45,6 +45,11 @@ int main(int argc, char **argv)
 
 	std::cout<<"<"<<solution.xs.front()<<", "<<solution.ys.front()<<", "<<solution.costs.front()<<">"<<std::endl;
 	std::cout<<"<"<<solution.xs.back()<<", "<<solution.ys.back()<<", "<<solution.costs.back()<<">"<<std::endl<<std::endl;
+	for(int i = 0; i < solution.xs.size(); i++)
+	{
+		std::cout<<'<'<<solution.xs[i]<<", "<<solution.ys[i]<<", "<<solution.costs[i]<<"> ";
+	}
+	std::cout<<std::endl;
 	
 	// aplica o algoritmo
 	// libera o mapa

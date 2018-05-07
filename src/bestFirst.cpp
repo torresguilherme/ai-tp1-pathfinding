@@ -1,4 +1,5 @@
 #include "bestFirst.h"
+#include <unistd.h>
 #include <cmath>
 #include <cstring>
 #include <vector>
@@ -46,7 +47,6 @@ Position bestFirst(Map* map, const char *heuristic, int w, int xInicial, int yIn
 		{
 			return current;
 		}
-		cout<<current.xs.back()<<'.'<<current.ys.back()<<endl;
 
 		bool upFree = false;
 		bool downFree = false;
@@ -154,6 +154,7 @@ Position bestFirst(Map* map, const char *heuristic, int w, int xInicial, int yIn
 		{
 			Position newP = current;
 			newP.ys.push_back(current.ys.back() + 1);
+			newP.xs.push_back(current.xs.back() + 1);
 			newP.costs.push_back(newP.costs.back()+1.5);
 			newP.depth = current.depth + 1;
 			visited[newP.xs.back()][newP.ys.back()] = true;
